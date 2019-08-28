@@ -49,14 +49,25 @@ function Shuffle(cards) {
 function output() {
     allPokemonImgUrl.forEach(function (i) {
         $('#output').append('<img src="'+ [i] +'">');
-    }
         
+    }
+    
 )}
+
+// Clears all the current data in the arrays before appending new data.
+function clear() {
+    originalPokemonImgUrl.length = 0;
+    duplicateAllPokemonImgUrl.length = 0;
+    allPokemonImgUrl.length = 0;
+    $('#output').empty();
+}
+
+
 
 /* This function copies the array so that we always have two of the same cards. 
 Then concat into a new array and shuffles it. After that it outputs the result.*/
 function startGame(){
-
+       
     setTimeout( function(){
         duplicateAllPokemonImgUrl = originalPokemonImgUrl.slice();
         }, 1000 );
@@ -82,6 +93,7 @@ $(document).on('click', '#easy', function() {
         getData();
     }
 
+    clear();
     startGame();
    
 })
@@ -90,7 +102,8 @@ $(document).on('click', '#medium', function() {
     for (var cards = 0; cards < medium; cards++) {
         getData();
     } 
-
+    
+    clear();
     startGame();
 
 })
@@ -100,6 +113,7 @@ $(document).on('click', '#hard', function() {
         getData();
     } 
 
+    clear();
     startGame();
 
 })
