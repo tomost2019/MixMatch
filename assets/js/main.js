@@ -28,19 +28,34 @@ function randomNumber() {
 function getData() {
     $.ajax ({ 
         type: 'GET',
-        url: pokemonDataUrl + randomNumber(), // Calling randomnnumber to get random pokémon.
+        url: pokemonDataUrl + randomNumber(), // Calling randomnnumber to get a random pokémon.
         success: function(pokemonData) {
-
+                
                 var pokemonImgUrl = pokemonData.sprites.front_default; // Store and extract pokemon images.
-
                 originalPokemonImgUrl.push(pokemonImgUrl); // store ImagesURL to a global array called allPokemonImgUrl.
+
         }
         
     })
 }
 
-// This function copies the array and concat into a new array so that we always get two pictures each from the API. It executes from a setTimeout.
-function duplicate(){
+// Shuffle code from css-tricks.com.
+function Shuffle(cards) {
+	for(var j, x, i = cards.length; i; j = parseInt(Math.random() * i), x = cards[--i], cards[i] = cards[j], cards[j] = x);
+	return cards;
+}; 
+
+// function iterates through allPokemonImgUrl array and outputs it into the DOM. 
+function output() {
+    allPokemonImgUrl.forEach(function (i) {
+        $('#output').append('<img src="'+ [i] +'">');
+    }
+        
+)}
+
+/* This function copies the array so that we always have two of the same cards. 
+Then concat into a new array and shuffles it. After that it outputs the result.*/
+function startGame(){
 
     setTimeout( function(){
         duplicateAllPokemonImgUrl = originalPokemonImgUrl.slice();
@@ -48,11 +63,16 @@ function duplicate(){
     
     setTimeout( function(){
         allPokemonImgUrl = originalPokemonImgUrl.concat(duplicateAllPokemonImgUrl);
-        console.log(allPokemonImgUrl);
         }, 1500 );
-    }
-   
+    
+    setTimeout( function(){
+        Shuffle(allPokemonImgUrl)
+        }, 2000 );
 
+    setTimeout( function(){
+        output();
+        }, 2500 );
+    }
 
 /* Events for clicking on game levels. It iterates to check how many cards it needs
 and calls the function getData accordingly. */
@@ -62,7 +82,8 @@ $(document).on('click', '#easy', function() {
         getData();
     }
 
-    duplicate();
+    startGame();
+   
 })
 
 $(document).on('click', '#medium', function() {
@@ -70,7 +91,7 @@ $(document).on('click', '#medium', function() {
         getData();
     } 
 
-    duplicate();
+    startGame();
 
 })
 
@@ -79,7 +100,7 @@ $(document).on('click', '#hard', function() {
         getData();
     } 
 
-    duplicate();
+    startGame();
 
 })
 
