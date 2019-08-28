@@ -1,3 +1,8 @@
 .buttons > div > div > button {
     margin-top: 10px;
 }
+
+#output > img {
+    width: 106px;
+    height: 106px;
+}
