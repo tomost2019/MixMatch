@@ -1,7 +1,10 @@
+// Loading variable to hide loadingDiv as standard.
+let $loading = $('.loadingDiv').hide();
+
 // Settings for game level. Each integer represents number of cards * 2.
 let easy = 4;
-let medium = 6;
-let hard = 8;
+let medium = 5;
+let hard = 6;
 
 // Arrays for PokemonImgUrl.
 
@@ -48,7 +51,17 @@ function Shuffle(cards) {
 // function iterates through allPokemonImgUrl array and outputs it into the DOM. 
 function output() {
     allPokemonImgUrl.forEach(function (i) {
-        $('#output').append('<img src="'+ [i] +'">');
+        $('#output').append
+        
+        (`
+        
+        <div class="col-4 col-sm-3">
+            <div class="pokemoncard-back"></div>
+        </div
+        
+        
+        
+        `);
         
     }
     
@@ -67,23 +80,29 @@ function clear() {
 /* This function copies the array so that we always have two of the same cards. 
 Then concat into a new array and shuffles it. After that it outputs the result.*/
 function startGame(){
-       
-    setTimeout( function(){
-        duplicateAllPokemonImgUrl = originalPokemonImgUrl.slice();
-        }, 1000 );
     
     setTimeout( function(){
-        allPokemonImgUrl = originalPokemonImgUrl.concat(duplicateAllPokemonImgUrl);
+        $loading.show(); // Show loading pikachu.
+        }, 100 ); 
+    
+    setTimeout( function(){
+        duplicateAllPokemonImgUrl = originalPokemonImgUrl.slice();
         }, 1500 );
     
     setTimeout( function(){
+        allPokemonImgUrl = originalPokemonImgUrl.concat(duplicateAllPokemonImgUrl);
+        }, 3000 );
+    
+    setTimeout( function(){
         Shuffle(allPokemonImgUrl)
-        }, 2000 );
+        }, 4000 );
 
     setTimeout( function(){
         output();
-        }, 2500 );
+        $loading.hide(); // Hide loading pikachu.
+        }, 4500 );
     }
+    
 
 /* Events for clicking on game levels. It iterates to check how many cards it needs
 and calls the function getData accordingly. */
@@ -94,9 +113,14 @@ $(document).on('click', '#easy', function() {
     }
 
     clear();
+    
     startGame();
-   
+    
+
+
 })
+   
+
 
 $(document).on('click', '#medium', function() {
     for (var cards = 0; cards < medium; cards++) {
@@ -105,6 +129,7 @@ $(document).on('click', '#medium', function() {
     
     clear();
     startGame();
+    
 
 })
 
@@ -117,5 +142,9 @@ $(document).on('click', '#hard', function() {
     startGame();
 
 })
+
+
+
+
 
 
