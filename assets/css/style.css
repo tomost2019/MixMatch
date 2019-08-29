@@ -1,8 +1,33 @@
+body {
+    background-color: #ffa401;
+}
 .buttons > div > div > button {
-    margin-top: 10px;
+    margin-top: 15px;
+    margin-bottom: 5px;
 }
 
 #output > img {
     width: 106px;
     height: 106px;
 }
+
+#output > div {
+    margin-bottom: 10px;
+}
+
+.loadingDiv{
+    margin-top: 30px;
+}
+
+
+.pokemoncard-back {
+    background-image: url(/assets/images/pokemoncard_back.png); 
+    background-position: center;
+    background-repeat: no-repeat;
+    width: auto;
+    height: 133px;
+    border-radius: 10px;
+    padding: 0;
+
+}
+
