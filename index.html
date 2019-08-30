@@ -11,31 +11,42 @@
     <title>MixMatch</title>
 </head>
 <body>
+
     <!-- for game level. It will generate the amount of cards depending on difficulty -->
-    <div class="container buttons text-center">
-        <div class="row">
+    <div class="container buttons">
+        <div class="row text-center">
+            <div class="col-12">
+                <h5><p class="mixmatch">MixMatch - Match the Pokémons!</p></h5>
+            </div>
             <div class="col-12">
                 <button type="button" class="btn btn-xs btn-success" id="easy">Easy</button>
                 <button type="button" class="btn btn-xs btn-warning" id="medium">Medium</button>
                 <button type="button" class="btn btn-xs btn-danger" id="hard">Hard</button>
                 <hr>
             </div>
-        </div>
+
+            <!-- Container for the turn counter -->
+            <div class="col-12">
+                <h5><p class="count-clicks">Turns: 0</p></h5>
+                <hr>
+            </div>
+        </div>   
     </div>
+
+    <!-- The loaded memory game output-->
     <div class="container">
-        <div class="row" id="output">
-        </div>
+        <div class="row text-center" id="output"></div>
     </div>
 
-<div class="container">
-    <div class="row text-center">
-        <div class="col-12">
-            <div class="loadingDiv"><img src="https://media.giphy.com/media/jM4bWFBKpSFeo/giphy.gif"></div>
+    <!-- Loading Pikachu -->
+    <div class="container loadingDiv">
+        <div class="row text-center">
+            <div class="col-12">
+                <img src="https://media.giphy.com/media/jM4bWFBKpSFeo/giphy.gif">
+            </div>
+            <div class="col-12"><h2>Loading Pokémons</h2></div>
         </div>
     </div>
-</div>
-
-
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
