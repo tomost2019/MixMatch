@@ -32,48 +32,13 @@ function getData() {
         url: pokemonDataUrl + randomNumber(), // Calling randomnnumber to get a random pokémon.
         success: function(pokemonData) {
                 
-                var pokemonImgUrl = pokemonData.sprites.front_default; // Store and extract pokemon images.
-                originalPokemonImgUrl.push(pokemonImgUrl); // store ImagesURL to a global array called allPokemonImgUrl.
+            var pokemonImgUrl = pokemonData.sprites.front_default; // Store and extract pokemon images.
+            originalPokemonImgUrl.push(pokemonImgUrl); // store ImagesURL to a global array called allPokemonImgUrl.
 
         }
         
     })
 }
-
-// Shuffle code from css-tricks.com.
-function Shuffle(cards) {
-	for(var j, x, i = cards.length; i; j = parseInt(Math.random() * i), x = cards[--i], cards[i] = cards[j], cards[j] = x);
-	return cards;
-}; 
-
-// function iterates through allPokemonImgUrl array.
-function output() {
-    allPokemonImgUrl.forEach(function (pokemonUrl) {
-        $('#output').append
-        
-        (`
-
-        
-            <div class="pokemoncard col-4 col-sm-3">
-            <div class="pokemon"><img src="${[pokemonUrl]}"></div>
-            </div>
-  
-   
-        
-        
-        `);
-        
-    }
-)}
-
-// Clears all the current data in the arrays before appending new data.
-function clear() {
-    originalPokemonImgUrl.length = 0;
-    duplicateAllPokemonImgUrl.length = 0;
-    allPokemonImgUrl.length = 0;
-    $('#output').empty();
-}
-
 
 /* Code from stackoverflow.com
 This disables the buttons after the on click event on the game level buttons.
@@ -96,8 +61,16 @@ function disableButtons() {
     $('#hard').timedDisable();
 }
 
+// Clears all the current data in the arrays before appending new data.
+function clear() {
+    originalPokemonImgUrl.length = 0;
+    duplicateAllPokemonImgUrl.length = 0;
+    allPokemonImgUrl.length = 0;
+    $('#output').empty();
+}
+
 /* This function copies the array so that we always have two of the same cards. 
-Then concat into a new array and shuffles it. After that it outputs the result and hide the pokemons */
+Then concat into a new array and shuffles it. After that it outputs the result */
 function startGame(){
     
     setTimeout( function(){
@@ -118,22 +91,42 @@ function startGame(){
 
     setTimeout( function(){
         output();
-        }, 4500 );
-
-    setTimeout( function(){
-        hidePokemon();
         $loading.hide(); // Hide loading pikachu.
         }, 4500 );
     }
 
-// Hides the pokemon when the game starts.   
-function hidePokemon() {
-     $('.pokemon').hide();
+// Shuffle code from css-tricks.com.
+function Shuffle(cards) {
+	for(var j, x, i = cards.length; i; j = parseInt(Math.random() * i), x = cards[--i], cards[i] = cards[j], cards[j] = x);
+	return cards;
+}; 
+
+// function iterates through allPokemonImgUrl array and appends the output.
+function output() {
+    allPokemonImgUrl.forEach(function (pokemonUrl) {
+        $('#output').append
+        
+        (`
+
+            <div class="col-4 col-sm-3 card-container">
+            <div class="card mx-auto">
+            <div class="pokemoncard-back transformation"></div>
+            <div class="pokemoncard-front transformation"><img class="pokemon" src="${[pokemonUrl]}"></div>
+            </div>
+            </div>
+
+        `);
+        
+    }
+)}
+
+// When clicking each card it adds the class visible so that the front card is visible. 
+function clickCard() {
+    $(document).on('click', '.card', function() {
+        $(this).addClass('visible');
+    })
 }
-
-
-
-    
+   
 /* Events for clicking on game levels. It iterates to check how many cards it needs
 and calls the function getData accordingly. */
 
@@ -144,6 +137,7 @@ $(document).on('click', '#easy', function() {
     disableButtons();   
     clear();
     startGame();
+    clickCard();
 })
    
 $(document).on('click', '#medium', function() {
@@ -153,6 +147,7 @@ $(document).on('click', '#medium', function() {
     disableButtons();   
     clear();
     startGame();
+    clickCard();
 })
 
 $(document).on('click', '#hard', function() {
@@ -162,6 +157,7 @@ $(document).on('click', '#hard', function() {
     disableButtons();   
     clear();
     startGame();
+    clickCard();
 })
 
 
@@ -174,3 +170,6 @@ $(document).on('click', '#hard', function() {
 
 
 
+
+
+ 
