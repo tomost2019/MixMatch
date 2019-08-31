@@ -31,7 +31,7 @@ body {
   }
 
 .pokemoncard-back {
-    background-image: url(/assets/images/pokemoncard_back.png); 
+    background-image: url(../images/pokemoncard_back.png); 
     -webkit-transform: rotateY(0); 
             transform: rotateY(0); 
 
