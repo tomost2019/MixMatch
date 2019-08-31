@@ -17,7 +17,7 @@
     <div class="container buttons">
         <div class="row text-center">
             <div class="col-12">
-                <h5><p class="mixmatch">MixMatch - Match the Pokémons!</p></h5>
+                <h5><p class="pt-2">MixMatch - Match the Pokémons!</p></h5>
             </div>
             <div class="col-12">
                 <button type="button" class="btn btn-xs btn-success" id="easy">Easy</button>
@@ -27,8 +27,8 @@
             </div>
 
             <!-- Container for the turn counter -->
-            <div class="col-12">
-                <h5><p class="count-clicks">Turns: 0</p></h5>
+            <div class="col-12 count-clicks">
+                <h5><p class="clicks">Turns: 0</p></h5>
                 <hr>
             </div>
         </div>   
@@ -36,7 +36,22 @@
 
     <!-- The loaded memory game output-->
     <div class="container">
-        <div class="row" id="output"></div>
+        <div class="row no-gutters" id="output"></div>
+    </div>
+
+    <!-- Start Page -->
+    <div class="container start-page">
+        <div class="row text-center">
+            <div class="col-10 mx-auto">
+                <h1 class="pb-4">Let's Play</h1>
+                <h6 class="pb-4">
+                    Start the game by selecting your difficult level.
+                    You can choose between Easy, Medium and Hard. 
+                    <h5 class="pb-3">Good Luck!</h5>
+                </h6>
+                <img class="w-75" src="https://media.giphy.com/media/ccctlnR5XKl1e/giphy.gif" style="border-radius: 8px;">
+            </div>
+        </div>
     </div>
 
     <!-- Loading Pikachu -->

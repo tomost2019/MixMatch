@@ -1,5 +1,10 @@
 // Loading variable to hide loadingDiv as standard.
 let $loading = $('.loadingDiv').hide();
+// StartPage variable to show as standard.
+let $startPage = $('.start-page').show();
+// Turn information is hidden before the game starts.
+let $countClicks = $('.count-clicks').hide();
+
 
 // Settings for game level. Each integer represents number of cards * 2.
 let easy = 4;
@@ -10,6 +15,9 @@ let hard = 6;
 let originalPokemonImgUrl = [];
 let duplicateAllPokemonImgUrl = [];
 let allPokemonImgUrl = [];
+
+// Arrays for the started game.
+let matchOrNot = [];
 
 // PokéAPI URL.
 const pokemonDataUrl = 'https://pokeapi.co/api/v2/pokemon/';
@@ -32,7 +40,7 @@ function getData() {
         url: pokemonDataUrl + randomNumber(), // Calling randomnnumber to get a random pokémon.
         success: function(pokemonData) {
                 
-            var pokemonImgUrl = pokemonData.sprites.front_default; // Store and extract pokemon images.
+            var pokemonImgUrl = pokemonData.sprites.front_shiny; // Store and extract pokemon images.
             originalPokemonImgUrl.push(pokemonImgUrl); // store ImagesURL to a global array called allPokemonImgUrl.
 
         }
@@ -74,7 +82,9 @@ Then concat into a new array and shuffles it. After that it outputs the result *
 function startGame(){
     
     setTimeout( function(){
-        $loading.show(); // Show loading pikachu.
+        $countClicks.hide(500); // Hides the turns count.
+        $startPage.hide(500); // Hides the startPage when game starts. 
+        $loading.show(1000); // Show loading pikachu.
         }, 100 ); 
     
     setTimeout( function(){
@@ -87,11 +97,12 @@ function startGame(){
     
     setTimeout( function(){
         Shuffle(allPokemonImgUrl)
+        $loading.hide(700); // Hide loading pikachu.
         }, 4000 );
 
     setTimeout( function(){
         output();
-        $loading.hide(); // Hide loading pikachu.
+        $countClicks.show(); // Shows the turns count.
         }, 4500 );
     }
 
@@ -108,10 +119,10 @@ function output() {
         
         (`
 
-            <div class="col-4 col-sm-3 card-container">
+            <div class="col-4 col-sm-3 card-container pb-2">
             <div class="card mx-auto">
             <div class="pokemoncard-back transformation"></div>
-            <div class="pokemoncard-front transformation"><img class="pokemon" src="${[pokemonUrl]}"></div>
+            <div class="pokemoncard-front transformation"><img class="pt-3 card-value" src="${[pokemonUrl]}"></div>
             </div>
             </div>
 
@@ -121,11 +132,50 @@ function output() {
 )}
 
 // When clicking each card it adds the class visible so that the front card is visible. 
+
+/*
+function clickCard() {
+    $(document).ready(function() {
+        $('.card').on('click', e => {
+            let $this = $(e.currentTarget)
+            $this.addClass('visible')
+            let cardValue = $this.attr('src');
+            matchOrNot.push(cardValue);
+    }
+)}
+
+)}
+*/
+
+
+function clickCard() {
+    $(document).ready(function() {
+
+        $(document).on('click', '.card' , e => {
+            let $this = $(e.currentTarget)
+            $this.addClass('visible')
+            let cardValue = $this.attr('src');
+            matchOrNot.push(cardValue);
+    
+            console.log(matchOrNot)
+
+    })
+
+    })
+}
+
+
+
+/*
 function clickCard() {
     $(document).on('click', '.card', function() {
         $(this).addClass('visible');
+
+        var cardValue = $(this).attr('src');
+        matchOrNot.push(cardValue);
+
     })
-}
+}*/
    
 /* Events for clicking on game levels. It iterates to check how many cards it needs
 and calls the function getData accordingly. */
@@ -138,6 +188,7 @@ $(document).on('click', '#easy', function() {
     clear();
     startGame();
     clickCard();
+ 
 })
    
 $(document).on('click', '#medium', function() {
@@ -159,6 +210,8 @@ $(document).on('click', '#hard', function() {
     startGame();
     clickCard();
 })
+
+
 
 
 

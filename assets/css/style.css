@@ -2,21 +2,13 @@ body {
     background-color: #ffff;
 }
 
-
-#output > div {
-    padding-bottom: 7px;
-}
-
-.mixmatch {
-    padding-top: 5px;
-}
-
-.loadingDiv{
-    padding-top: 30px;
+.start-page > div > div > h1 {
+    color: rgb(255, 0, 170);
 }
 
 .card-container {
-    perspective: 1000px;
+    -webkit-perspective: 500px;
+            perspective: 500px;
 }
 
 .card {
@@ -29,36 +21,40 @@ body {
 }
 
 .card.visible .pokemoncardcard-back {
-    transform: rotateY(-180deg); 
+    -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg); 
   }
 
 .card.visible .pokemoncard-front {
-    transform: rotateY(0); 
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0); 
   }
 
 .pokemoncard-back {
     background-image: url(/assets/images/pokemoncard_back.png); 
-    transform: rotateY(0); 
+    -webkit-transform: rotateY(0); 
+            transform: rotateY(0); 
 
 }
 
 .pokemoncard-front {
     background-color: #ffff;
-    transform: rotateY(180deg);
-}
-
-.pokemon {
-    padding-top: 15px;
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
 }
 
 .transformation {
     position: absolute;
     width: 100%;
     height: 100%;
+    -webkit-transition: -webkit-transform 600ms ease-in-out;
+    transition: -webkit-transform 600ms ease-in-out;
+    -o-transition: transform 600ms ease-in-out;
     transition: transform 600ms ease-in-out;
-    backface-visibility: hidden;
-    border: 1px solid #000;
+    transition: transform 600ms ease-in-out, -webkit-transform 600ms ease-in-out;
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    border: 2px solid #000;
     border-radius: 8px;
 
   }
-
