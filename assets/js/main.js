@@ -3,7 +3,7 @@ let $loading = $('.loadingDiv').hide();
 // StartPage variable to show as standard.
 let $startPage = $('.start-page').show();
 // Turn information is hidden before the game starts.
-let $countClicks = $('.count-clicks').hide();
+let $turnCounter = $('.turn-counter').hide();
 // Victory page hidden as standard.
 let $victory = $('.victoryPage').hide();
 
@@ -19,11 +19,14 @@ let allPokemonImgUrl = [];
 
 // Arrays for the matching the cards.
 let gameCards = [];
-let matchingCards = [];
+let checkMatch = [];
 
-// Arrays for clicked events
-let clicked = [];
-let clicked2 = [];
+// Arrays for clicked events.
+let clickedEvent = [];
+let clickedEvent2 = [];
+
+// Clicks variable
+let countedTurns = 0;
 
 // PokéAPI URL.
 const pokemonDataUrl = 'https://pokeapi.co/api/v2/pokemon/';
@@ -42,7 +45,11 @@ function randomNumber() {
 // when all cards matches the user wins and the victory page loads.
 function victory() {
     if (gameCards.length === allPokemonImgUrl.length) {
-        $countClicks.hide(700);
+        
+        $turnCounter.hide(500) // hides the turn Counter.
+
+        // Reset turn counter
+        $('.counted-turns').text('Turns: 0');
         
         //setTimeouts to let the user see the last card before it calls the victory. 
         setTimeout(function () {
@@ -55,6 +62,8 @@ function victory() {
     }
 }
 
+
+
 // function for play the game, checks if cards matches or not. Calls the victory function when all the cards are matched. 
 function playGame() {
     // click function.
@@ -63,59 +72,64 @@ function playGame() {
         $this.addClass('visible')
 
         // this pushes click events to arrays to keep track of this and previous this. 
-        clicked.push($this);
-        clicked2.push($this);
+        clickedEvent.push($this);
+        clickedEvent2.push($this);
 
         /* Matching the cards */
 
         // Pushes the image src into an array to check if there is a match.
         let matchedCards  = $this.find('img').attr('src')
-        matchingCards.push(matchedCards);
+        checkMatch.push(matchedCards);
 
         // if statement to see if the src string matches. 
-        if(matchingCards[0] === matchingCards[1]) {
+        if(checkMatch[0] === checkMatch[1]) {
 
             // if true then push into a global array that store all the matched cards (image src).
-            gameCards.push(matchingCards[0]);
-            gameCards.push(matchingCards[1]);
+            gameCards.push(checkMatch[0]);
+            gameCards.push(checkMatch[1]);
+            countedTurns++
     
-            matchingCards.length = 0; // reset the matchingCards array.
+            checkMatch.length = 0; // reset the checkMatch array.
             
             // if two card matches then add class matched that removes pointing. 
             // Keeps track of the actual card from this and previous this array (clicked, clicked2)
 
             $this.addClass('matched')
-            clicked[0].addClass('matched');
+            clickedEvent[0].addClass('matched');
 
             // removes the data from the arrays that keep tracks of this and previous this. 
-            clicked.length = 0;
-            clicked2.length = 0;
+            clickedEvent.length = 0;
+            clickedEvent2.length = 0;
         
         } 
+
+        // Count Turns //
+
+        $('.counted-turns').text('Turns: ' + countedTurns);
 
         /* Card not matched */
 
         // Disable clicks on a single card with pokemoncard-front.
         // Prevents the user for clicking fast on a new card when the other two flips back. 
-        if(matchingCards.length == 1) {
-            $this.addClass('can-flip');
+        if(checkMatch.length == 1) {
+            $this.addClass('can-not-flip');
         }
 
         // if the array length is equal to 2 and the strings do not match then reset the array and flip cards to the pokemoncard-back. 
-        if(matchingCards.length == 2 && matchingCards[0] != matchingCards[1]) {
+        if(checkMatch.length == 2 && checkMatch[0] != checkMatch[1]) {
             
-            matchingCards.length = 0; // resets the matching array. 
+            checkMatch.length = 0; // resets the matching array. 
 
-            // Prevents the user to click on other cars while the cards flip back
-            $('.card').addClass('can-flip') 
+            // Prevents the user to click on other cards while the cards flip back
+            $('.card').addClass('can-not-flip') 
             
             // flips the cards with a setTimeout. Removes this and previous this data from the arrays  .
             setTimeout( function(){
-                $('.card').removeClass('can-flip') // Enables the user to flip cards again.
+                $('.card').removeClass('can-not-flip') // Enables the user to flip cards again.
                 $this.removeClass('visible');
-                clicked2[0].removeClass('visible');
-                clicked2.length = 0; // Clear data.
-                clicked.length = 0; // Clear data.
+                clickedEvent2[0].removeClass('visible');
+                clickedEvent2.length = 0; // Clear data.
+                clickedEvent.length = 0; // Clear data.
                 }, 1000 ); // timer to let the user remember the cards. 
    
         }
@@ -175,8 +189,9 @@ function clear() {
     duplicateAllPokemonImgUrl.length = 0;
     allPokemonImgUrl.length = 0;
     gameCards.length = 0;
-    clicked.length = 0;
-    clicked2.length = 0;
+    clickedEvent.length = 0;
+    clickedEvent2.length = 0;
+    countedTurns = 0;
     $('#output').empty();
 }
 
@@ -210,8 +225,8 @@ Then concat into a new array and shuffles it. After that it outputs the result *
 function startGame(){
     
     setTimeout( function(){
-        $victory.hide(500);
-        $countClicks.hide(500); // Hides the turns count.
+        $victory.hide(500); // Hides the victory. 
+        $turnCounter.hide(500); // Hides the turns count.
         $startPage.hide(500); // Hides the startPage when game starts. 
         $loading.show(1000); // Show loading pikachu.
         }, 100 ); 
@@ -231,7 +246,8 @@ function startGame(){
 
     setTimeout( function(){
         output();
-        $countClicks.show(); // Shows the turns count.
+        $turnCounter.show(); // Shows the turns count.
+        $('.counted-turns').text('Turns: 0') // Shows the standard counted turns.
         }, 4500 );
     }
 
