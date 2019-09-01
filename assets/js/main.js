@@ -59,6 +59,8 @@ function playGame() {
         clicked.push($this);
         clicked2.push($this);
 
+        /* Matching the cards */
+
         // Pushes the image src into an array to check if there is a match.
         let matchedCards  = $this.find('img').attr('src')
         matchingCards.push(matchedCards);
@@ -84,21 +86,35 @@ function playGame() {
         
         } 
 
+        /* Card not matched */
+
+        // Disable clicks on a single card with pokemoncard-front.
+        // Prevents the user for clicking fast on a new card when the other two flips back. 
+        if(matchingCards.length == 1) {
+            $this.addClass('can-flip');
+        }
+
         // if the array length is equal to 2 and the strings do not match then reset the array and flip cards to the pokemoncard-back. 
         if(matchingCards.length == 2 && matchingCards[0] != matchingCards[1]) {
             
             matchingCards.length = 0; // resets the matching array. 
+
+            // Prevents the user to click on other cars while the cards flip back
+            $('.card').addClass('can-flip') 
             
             // flips the cards with a setTimeout. Removes this and previous this data from the arrays  .
             setTimeout( function(){
+                $('.card').removeClass('can-flip') // Enables the user to flip cards again.
                 $this.removeClass('visible');
                 clicked2[0].removeClass('visible');
-                clicked2.length = 0;
-                clicked.length = 0;
+                clicked2.length = 0; // Clear data.
+                clicked.length = 0; // Clear data.
                 }, 1000 ); // timer to let the user remember the cards. 
-            
+   
         }
         
+        /* The user wins */
+
         // Run the victory function when all cards are matched. It compares length of gameCards and allPokemonImgUrl.
         victory(); 
         
