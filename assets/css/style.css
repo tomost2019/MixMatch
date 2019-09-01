@@ -33,6 +33,11 @@ body {
 .matched {
     pointer-events: none;
 }
+
+.can-flip {
+    pointer-events: none;
+}
+
  
 
 .pokemoncard-back {
