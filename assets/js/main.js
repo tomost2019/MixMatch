@@ -25,12 +25,37 @@ let checkMatch = [];
 let clickedEvent = [];
 let clickedEvent2 = [];
 
-// Clicks variable
+// Clicks variable.
 let countedFlips = 0;
-let countedFlipsText = 'Flips: 0'
+
 
 // PokéAPI URL.
 const pokemonDataUrl = 'https://pokeapi.co/api/v2/pokemon/';
+
+// Sound functions.
+
+    function soundClick(){
+        let audio = new Audio();
+        audio.src ='../assets/sound/soundclick.mp3';
+
+        return audio.play()
+    } 
+
+    function soundMatch(){
+        let audio = new Audio();
+        audio.src ='../assets/sound/soundmatch.mp3';
+        
+        return audio.play()
+    }
+
+    function soundVictory(){
+        let audio = new Audio();
+        audio.src ='../assets/sound/soundvictory.mp3';
+        
+        return audio.play()
+
+    }
+
 
 // This function creates a random number depending on the settings below. 
 function randomNumber() {
@@ -48,13 +73,17 @@ function victory() {
     if (gameCards.length === allPokemonImgUrl.length) {
         
         $turnCounter.hide(500) // hides the turn Counter.
+        
+        
+        
 
         // Reset turn counter
-        $('.counted-turns').text(countedFlipsText);
+        $('.counted-turns').text('');
         
         //setTimeouts to let the user see the last card before it calls the victory. 
         setTimeout(function () {
             $victory.show(800);
+            soundVictory(); // Calls the victory sound.
         }, 1000)
         setTimeout( function() {
             $('.card').hide(800);
@@ -76,6 +105,10 @@ function playGame() {
         clickedEvent.push($this);
         clickedEvent2.push($this);
 
+        // Calling the sound when a card is clicked.
+
+        soundClick();
+
         /* Matching the cards */
 
         // Pushes the image src into an array to check if there is a match.
@@ -84,6 +117,9 @@ function playGame() {
 
         // if statement to see if the src string matches. 
         if(checkMatch[0] === checkMatch[1]) {
+
+            // Calls the sound when a match is made.
+            soundMatch();
 
             // if true then push into a global array that store all the matched cards (image src).
             gameCards.push(checkMatch[0]);
@@ -257,7 +293,7 @@ function startGame(){
     setTimeout( function(){
         output();
         $turnCounter.show(); // Shows the turns count.
-        $('.counted-turns').text(countedFlipsText) // Shows the standard counted turns.
+        $('.counted-turns').text('Flips: 0') // Shows the standard counted turns.
         }, 4500 );
     }
 
