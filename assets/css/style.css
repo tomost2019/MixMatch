@@ -34,7 +34,7 @@ body {
     pointer-events: none;
 }
 
-.can-flip {
+.can-not-flip {
     pointer-events: none;
 }
 
