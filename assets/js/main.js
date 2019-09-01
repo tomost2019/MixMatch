@@ -26,7 +26,8 @@ let clickedEvent = [];
 let clickedEvent2 = [];
 
 // Clicks variable
-let countedTurns = 0;
+let countedFlips = 0;
+let countedFlipsText = 'Flips: 0'
 
 // PokéAPI URL.
 const pokemonDataUrl = 'https://pokeapi.co/api/v2/pokemon/';
@@ -49,7 +50,7 @@ function victory() {
         $turnCounter.hide(500) // hides the turn Counter.
 
         // Reset turn counter
-        $('.counted-turns').text('Turns: 0');
+        $('.counted-turns').text(countedFlipsText);
         
         //setTimeouts to let the user see the last card before it calls the victory. 
         setTimeout(function () {
@@ -87,7 +88,8 @@ function playGame() {
             // if true then push into a global array that store all the matched cards (image src).
             gameCards.push(checkMatch[0]);
             gameCards.push(checkMatch[1]);
-            countedTurns++
+            
+            countedFlips++ // Add a number to the flip counter.
     
             checkMatch.length = 0; // reset the checkMatch array.
             
@@ -103,10 +105,7 @@ function playGame() {
         
         } 
 
-        // Count Turns //
-
-        $('.counted-turns').text('Turns: ' + countedTurns);
-
+        
         /* Card not matched */
 
         // Disable clicks on a single card with pokemoncard-front.
@@ -117,8 +116,12 @@ function playGame() {
 
         // if the array length is equal to 2 and the strings do not match then reset the array and flip cards to the pokemoncard-back. 
         if(checkMatch.length == 2 && checkMatch[0] != checkMatch[1]) {
-            
+
+            countedFlips++ // Add a number to the flip counter.
+
             checkMatch.length = 0; // resets the matching array. 
+
+            
 
             // Prevents the user to click on other cards while the cards flip back
             $('.card').addClass('can-not-flip') 
@@ -131,8 +134,15 @@ function playGame() {
                 clickedEvent2.length = 0; // Clear data.
                 clickedEvent.length = 0; // Clear data.
                 }, 1000 ); // timer to let the user remember the cards. 
+
+                
    
         }
+
+        // Count Flips //
+
+        $('.counted-turns').text('Flips: ' + countedFlips);
+
         
         /* The user wins */
 
@@ -191,7 +201,7 @@ function clear() {
     gameCards.length = 0;
     clickedEvent.length = 0;
     clickedEvent2.length = 0;
-    countedTurns = 0;
+    countedFlips = 0;
     $('#output').empty();
 }
 
@@ -247,7 +257,7 @@ function startGame(){
     setTimeout( function(){
         output();
         $turnCounter.show(); // Shows the turns count.
-        $('.counted-turns').text('Turns: 0') // Shows the standard counted turns.
+        $('.counted-turns').text(countedFlipsText) // Shows the standard counted turns.
         }, 4500 );
     }
 
