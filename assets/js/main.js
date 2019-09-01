@@ -42,9 +42,16 @@ function randomNumber() {
 // when all cards matches the user wins and the victory page loads.
 function victory() {
     if (gameCards.length === allPokemonImgUrl.length) {
-        clear();
         $countClicks.hide(700);
-        $victory.show(700);
+        
+        //setTimeouts to let the user see the last card before it calls the victory. 
+        setTimeout(function () {
+            $victory.show(800);
+        }, 1000)
+        setTimeout( function() {
+            $('.card').hide(800);
+        }, 1000)
+        
     }
 }
 
@@ -116,6 +123,7 @@ function playGame() {
         /* The user wins */
 
         // Run the victory function when all cards are matched. It compares length of gameCards and allPokemonImgUrl.
+        
         victory(); 
         
     })
