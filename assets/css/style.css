@@ -9,7 +9,10 @@ a,
 a:hover,
 a:focus {
     color: inherit;
+    outline: 0;
     text-decoration: none;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
     transition: all 0.3s;
 }
 
@@ -98,7 +101,8 @@ a:focus {
     background: #fff;
     border: none;
     border-radius: 0;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -113,7 +117,8 @@ a:focus {
     border: none;
     border-radius: 0;
     margin-bottom: 10x;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* Sidebar */
@@ -128,10 +133,18 @@ a:focus {
     font-weight: bold;
 }
 
+.pokeball {
+    list-style-type: none;
+}
+
 .content-all {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     width: 100%;
-    align-items: stretch;
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
 }
 
 #game-sidebar {
@@ -139,6 +152,8 @@ a:focus {
     max-width: 250px;
     background: rgb(37, 40, 53);
     color: #fff;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
     transition: all 0.3s;
 }
 
@@ -188,6 +203,8 @@ a:focus {
     width: 100%;
     padding: 0px;
     min-height: 100vh;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
     transition: all 0.3s;
 }
 
@@ -264,5 +281,4 @@ a:focus {
     }
 
 }
-
 
