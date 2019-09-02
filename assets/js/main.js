@@ -32,45 +32,31 @@ let countedFlips = 0;
 const pokemonDataUrl = 'https://pokeapi.co/api/v2/pokemon/';
 
 // Mute Audio.
-
-let muteAudio = false;
-
 function muteAll() {
     $(document).on('click', '.mute-all', function() {
-        muteAudio = true;
+        $('#clickedSound')[0].muted = true;
+        $('#clickedMatch')[0].muted = true;
+        $('#clickedVictory')[0].muted = true;
     })
 }
 
+// Turn on Audio.
 function soundOn() {
     $(document).on('click', '.sound-on', function() {
-        muteAudio = false;
+        $('#clickedSound')[0].muted = false;
+        $('#clickedMatch')[0].muted = false;
+        $('#clickedVictory')[0].muted = false;
     })
 }
 
 // Sound functions.
-
 function soundClicked() {
-
-    if(muteAudio == true) {
-        $('#clickedSound')[0].muted = true;
-        $('#clickedMatch')[0].muted = true;
-        $('#clickedVictory')[0].muted = true;
-    } 
     
-        $('#clickedSound')[0].currentTime = 0;
-        $('#clickedSound')[0].play();
-
-
+    $('#clickedSound')[0].currentTime = 0;
+    $('#clickedSound')[0].play();
 }
 
 function soundMatch() {
-
-    if(muteAudio === true) {
-        $('#clickedSound')[0].muted = true;
-        $('#clickedMatch')[0].muted = true;
-        $('#clickedVictory')[0].muted = true;
-    }
-
 
     $('#clickedMatch')[0].currentTime = 0;
     $('#clickedMatch')[0].play();
@@ -78,17 +64,9 @@ function soundMatch() {
 
 function soundVictory() {
 
-    if(muteAudio === true) {
-        $('#clickedSound')[0].muted = true;
-        $('#clickedMatch')[0].muted = true;
-        $('#clickedVictory')[0].muted = true;
-    }
-
     $('#clickedVictory')[0].currentTime = 0;
     $('#clickedVictory')[0].play();
 }
-
-
 
 // This function creates a random number depending on the settings below. 
 function randomNumber() {
@@ -134,7 +112,6 @@ function playGame() {
         clickedEvent2.push($this);
 
         // Calling the sound when a card is clicked.
-
         soundClicked();
 
         /* Matching the cards */
@@ -168,7 +145,6 @@ function playGame() {
             clickedEvent2.length = 0;
         
         } 
-
         
         /* Card not matched */
 
@@ -185,8 +161,6 @@ function playGame() {
 
             checkMatch.length = 0; // resets the matching array. 
 
-            
-
             // Prevents the user to click on other cards while the cards flip back
             $('.card').addClass('can-not-flip') 
             
@@ -199,8 +173,6 @@ function playGame() {
                 clickedEvent.length = 0; // Clear data.
                 }, 1000 ); // timer to let the user remember the cards. 
 
-                
-   
         }
 
         // Count Flips //
