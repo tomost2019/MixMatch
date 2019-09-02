@@ -11,6 +11,7 @@ let $victory = $('.victoryPage').hide();
 let easy = 4;
 let medium = 5;
 let hard = 6;
+let extreme = 12;
 
 // Arrays for PokemonImgUrl.
 let originalPokemonImgUrl = [];
@@ -51,19 +52,16 @@ function soundOn() {
 
 // Sound functions.
 function soundClicked() {
-    
     $('#clickedSound')[0].currentTime = 0;
     $('#clickedSound')[0].play();
 }
 
 function soundMatch() {
-
     $('#clickedMatch')[0].currentTime = 0;
     $('#clickedMatch')[0].play();
 }
 
 function soundVictory() {
-
     $('#clickedVictory')[0].currentTime = 0;
     $('#clickedVictory')[0].play();
 }
@@ -88,11 +86,14 @@ function victory() {
         
         //setTimeouts to let the user see the last card before it calls the victory. 
         setTimeout(function () {
-            $victory.show(800);
+            $victory.show();
             soundVictory(); // Calls the victory sound.
         }, 1000)
         setTimeout( function() {
-            $('.card').hide(800);
+            $('.card').hide();
+            $('#game-sidebar').toggleClass('active');
+            $('#sidebarCollapse').hide();
+            $('#output').hide();
         }, 1000)
         
     }
@@ -258,7 +259,7 @@ function output() {
         
         (`
 
-            <div class="col-4 col-sm-3 card-container">
+            <div class="col-4 col-sm-3 card-container pb-1">
             <div class="card mx-auto">
             <div class="pokemoncard-back transformation"></div>
             <div class="pokemoncard-front transformation"><img class="pokemon" src="${[pokemonUrl]}"></div>
@@ -275,10 +276,14 @@ Then concat into a new array and shuffles it. After that it outputs the result *
 function startGame(){
     
     setTimeout( function(){
-        $victory.hide(500); // Hides the victory. 
-        $turnCounter.hide(500); // Hides the turns count.
-        $startPage.hide(500); // Hides the startPage when game starts. 
-        $loading.show(1000); // Show loading pikachu.
+        $victory.hide(); // Hides the victory. 
+        $turnCounter.hide(); // Hides the turns count.
+        $startPage.hide(); // Hides the startPage when game starts. 
+        $loading.show(); // Show loading pikachu.
+        $('#game-sidebarCollapse').show();
+        $('#game-sidebar').toggleClass('active');
+        $('#sidebarCollapse').hide();
+        $('#output').show();
         }, 100 ); 
     
     setTimeout( function(){
@@ -291,13 +296,14 @@ function startGame(){
     
     setTimeout( function(){
         Shuffle(allPokemonImgUrl)
-        $loading.hide(700); // Hide loading pikachu.
+        $loading.hide(500); // Hide loading pikachu.
         }, 4000 );
 
     setTimeout( function(){
         output();
         $turnCounter.show(); // Shows the turns count.
         $('.counted-turns').text('Flips: 0') // Shows the standard counted turns.
+        $('#sidebarCollapse').show();
         }, 4500 );
     }
 
@@ -332,6 +338,31 @@ $(document).on('click', '#hard', function() {
     clear();
     startGame();
 })
+
+$(document).on('click', '#extreme', function() {
+    for (var cards = 0; cards < extreme; cards++) {
+        getData();
+    } 
+    disableButtons();   
+    clear();
+    startGame();
+})
+
+// Always show the game-sidebar on mobile devices. 
+
+$(document).ready(function () {
+    $('#game-sidebar').show()
+})
+
+// Enable Toggle button. 
+$(document).ready(function () {
+    $('#sidebarCollapse').on('click', function () {
+        $('#game-sidebar').toggleClass('active');
+        $('#output').hide();
+        $turnCounter.hide()
+        $('.start-page').show()
+    });
+});
 
 
 
