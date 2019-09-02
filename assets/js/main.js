@@ -33,12 +33,6 @@ const pokemonDataUrl = 'https://pokeapi.co/api/v2/pokemon/';
 
 // Mute Audio.
 
-var promise = audio.play();
-if (promise) {
-    //Older browsers may not return a promise, according to the MDN website
-    promise.catch(function(error) { console.error(error); });
-}
-
 let muteAudio = false;
 
 function muteAll() {
@@ -68,7 +62,7 @@ function soundOn() {
 
     function soundMatch(){
         let audio = new Audio();
-        audio.src ='assets/sound/soundmatch.mp3';
+        audio.src ='/assets/sound/soundmatch.mp3';
 
         if(muteAudio === true) {
             audio.muted = true;
