@@ -32,6 +32,13 @@ let countedFlips = 0;
 const pokemonDataUrl = 'https://pokeapi.co/api/v2/pokemon/';
 
 // Mute Audio.
+
+var promise = audio.play();
+if (promise) {
+    //Older browsers may not return a promise, according to the MDN website
+    promise.catch(function(error) { console.error(error); });
+}
+
 let muteAudio = false;
 
 function muteAll() {
