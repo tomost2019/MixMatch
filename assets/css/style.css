@@ -6,17 +6,32 @@ body {
     color: rgb(255, 0, 170);
 }
 
+.mute-all:hover {
+    color: red;
+}
+
+.sound-on:hover {
+    color: rgb(0, 158, 71);
+}
+
+
+
 .card-container {
     -webkit-perspective: 500px;
             perspective: 500px;
+    padding-bottom: 10px;
 
+}
+
+.pokemon {
+    margin-top: 20px;
 }
 
 .card {
     cursor: pointer;
     position: relative;
-    width: 96px;
-    height: 133px;
+    width: 100px;
+    height: 139px;
     border: none;
 
 }
@@ -54,6 +69,7 @@ body {
     -webkit-transform: rotateY(-180deg);
     -ms-transform: rotateY(-180deg);
     transform: rotateY(-180deg); 
+    border: solid #000;
 }
 
 .transformation {
@@ -65,7 +81,68 @@ body {
     transition: transform 600ms ease-in-out, -webkit-transform 600ms ease-in-out;
     -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-    border: solid #000;
     border-radius: 8px;
 
   }
+
+/* Media queries */
+
+
+/* From tablet size and up */
+
+@media (min-width: 768px) {
+
+    .card {
+        cursor: pointer;
+        position: relative;
+        width: 140px;
+        height: 194px;
+        border: none;
+    
+    }
+
+    .pokemoncard-back {
+        background-image: url(../images/pokemoncard_large.png); 
+    
+    }
+
+    .pokemon {
+        width: 120px;
+        height: 120px;
+        margin-top: 35px;
+        margin-left: 8px;
+    }
+
+    .card-container {
+        -webkit-perspective: 500px;
+                perspective: 500px;
+        padding-bottom: 30px
+    
+    }
+}
+
+/* Smaller mobile devices */
+
+@media (max-width: 320px) {
+
+    .card {
+        cursor: pointer;
+        position: relative;
+        width: 90px;
+        height: 125px;
+        border: none;
+    
+    }
+
+    .pokemoncard-back {
+        background-image: url(../images/pokemoncard_small.png); 
+    
+    }
+
+    .pokemon {
+        width: 90px;
+        height: 90px;
+        margin-top: 15px;
+    }
+
+}
