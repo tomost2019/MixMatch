@@ -49,39 +49,45 @@ function soundOn() {
 
 // Sound functions.
 
-    function soundClick(){
-        let audio = new Audio();
-        audio.src ='/assets/sound/soundclick.mp3';
+function soundClicked() {
 
-        if(muteAudio === true) {
-            audio.muted = true;
-        } 
-
-        return audio.play()
+    if(muteAudio == true) {
+        $('#clickedSound')[0].muted = true;
+        $('#clickedMatch')[0].muted = true;
+        $('#clickedVictory')[0].muted = true;
     } 
+    
+        $('#clickedSound')[0].currentTime = 0;
+        $('#clickedSound')[0].play();
 
-    function soundMatch(){
-        let audio = new Audio();
-        audio.src ='/assets/sound/soundmatch.mp3';
 
-        if(muteAudio === true) {
-            audio.muted = true;
-        } 
-        
-        return audio.play()
+}
+
+function soundMatch() {
+
+    if(muteAudio === true) {
+        $('#clickedSound')[0].muted = true;
+        $('#clickedMatch')[0].muted = true;
+        $('#clickedVictory')[0].muted = true;
     }
 
-    function soundVictory(){
-        let audio = new Audio();
-        audio.src ='/assets/sound/soundvictory.mp3';
 
-        if(muteAudio === true) {
-            audio.muted = true;
-        } 
-        
-        return audio.play()
+    $('#clickedMatch')[0].currentTime = 0;
+    $('#clickedMatch')[0].play();
+}
 
+function soundVictory() {
+
+    if(muteAudio === true) {
+        $('#clickedSound')[0].muted = true;
+        $('#clickedMatch')[0].muted = true;
+        $('#clickedVictory')[0].muted = true;
     }
+
+    $('#clickedVictory')[0].currentTime = 0;
+    $('#clickedVictory')[0].play();
+}
+
 
 
 // This function creates a random number depending on the settings below. 
@@ -129,7 +135,7 @@ function playGame() {
 
         // Calling the sound when a card is clicked.
 
-        soundClick();
+        soundClicked();
 
         /* Matching the cards */
 
