@@ -57,7 +57,7 @@ function soundOn() {
 
     function soundClick(){
         let audio = new Audio();
-        audio.src ='../assets/sound/soundclick.mp3';
+        audio.src ='/assets/sound/soundclick.mp3';
 
         if(muteAudio === true) {
             audio.muted = true;
@@ -68,7 +68,7 @@ function soundOn() {
 
     function soundMatch(){
         let audio = new Audio();
-        audio.src ='../assets/sound/soundmatch.mp3';
+        audio.src ='assets/sound/soundmatch.mp3';
 
         if(muteAudio === true) {
             audio.muted = true;
@@ -79,7 +79,7 @@ function soundOn() {
 
     function soundVictory(){
         let audio = new Audio();
-        audio.src ='../assets/sound/soundvictory.mp3';
+        audio.src ='/assets/sound/soundvictory.mp3';
 
         if(muteAudio === true) {
             audio.muted = true;
