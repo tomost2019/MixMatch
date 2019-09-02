@@ -97,14 +97,9 @@ function randomNumber() {
 // when all cards matches the user wins and the victory page loads.
 function victory() {
     if (gameCards.length === allPokemonImgUrl.length) {
-        
-        $turnCounter.hide(500) // hides the turn Counter.
-        
-        
-        
 
         // Reset turn counter
-        $('.counted-turns').text('');
+        $('.counted-turns').text('You Won!');
         
         //setTimeouts to let the user see the last card before it calls the victory. 
         setTimeout(function () {
