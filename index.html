@@ -13,32 +13,61 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <title>MixMatch</title>
 </head>
+
 <body>
+    <div class="content-all">
 
-    <!-- for game level. It will generate the amount of cards depending on difficulty -->
-    <div class="container buttons">
+        <!-- Game Sidebar  -->
+        <nav id="game-sidebar">
+            <div class="sidebar-header">
+                <h6>Difficulty</h6>
+            </div>
+            <ul class="game-level components">    
+                <li class="easy_text">
+                    <a href="#" id="easy" class="game-level-buttons">Easy</a>
+                </li>
+                <li class="medium_text">
+                    <a href="#" id="medium" class="game-level-buttons">Medium</a>
+                </li>
+                <li class="hard_text">
+                    <a href="#" id="hard" class="game-level-buttons">Hard</a>
+                </li>
+                <li class="extreme_text">
+                    <a href="#" id="extreme" class="game-level-buttons">Extreme</a>
+                </li>
+                <li>
+                    <img src="assets/images/pokeball.png" class="pt-4">
+                </li>
+            </ul>                
+        </nav>
+
+    <div id="content-game">
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-light navbar-expand-md bg-light justify-content-center pb-1">
+        <button type="button" id="sidebarCollapse" class="btn btn-sm btn-light">
+            <img src="https://img.icons8.com/windows/32/000000/recurring-appointment.png">
+        </button>
+            <span class="pl-3 pt-1"><h5>MixMatch</h5></span> 
+        <div>
+            <ul class="navbar-nav mx-auto text-center pl-3">
+                <li class="nav-item">
+                    <button type="button" class="btn btn-sm sound-on"><i class="fas fa-volume-up"></i></button>
+                    <button type="button" class="btn btn-sm  mute-all"><i class="fas fa-volume-mute"></i></button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Flip Counter -->
+    <div class="container-fluid bg-light">
         <div class="row text-center">
-            <div class="col-12">
-                <h5><p class="pt-2">MixMatch - Match the Pokémons!</p></h5>
-            </div>
-            <div class="col-12">
-                <button type="button" class="btn  btn-success" id="easy">Easy</button>
-                <button type="button" class="btn btn-warning" id="medium">Medium</button>
-                <button type="button" class="btn btn-danger" id="hard">Hard</button>
-                <div class="col-12">
-                    <button type="button" class="btn btn-lg mute-all mt-2"><i class="fas fa-volume-mute"></i></button>
-                    <button type="button" class="btn btn-lg sound-on mt-2 active"><i class="fas fa-volume-up"></i></button>
-                </div>
-                <hr>
-            </div>
-
-            <!-- Container for the turn counter -->
-            <div class="col-12 turn-counter">
+            <div class="col-12  turn-counter flip-counter">
                 <h4><span class="counted-turns"></span></h4>
-                <hr>
             </div>
-        </div>   
+        </div>
     </div>
+
 
     <!-- The loaded memory game output-->
     <div class="container">
@@ -46,12 +75,13 @@
     </div>
 
     <!-- Start Page -->
-    <div class="container start-page">
+    <div class="container start-page pt-3">
         <div class="row text-center">
             <div class="col-12 mx-auto">
                 <h1 class="pb-4 play">Let's Play</h1>
-                <h6 class="pb-4">
+                <h6>
                     Start the game by selecting your difficulty level.
+                    <p class="pt-2">Match each pokemon to win the game!</p>
                     <h5 class="pb-3">Good Luck!</h5>
                 </h6>
                 <img class="w-50 rounded" src="https://media.giphy.com/media/ccctlnR5XKl1e/giphy.gif">
@@ -61,24 +91,24 @@
 
     <!-- Loading Pikachu -->
     <div class="container loadingDiv">
-        <div class="row text-center">
-            <div class="col-12">
-                <img src="https://media.giphy.com/media/jM4bWFBKpSFeo/giphy.gif">
-            </div>
-            <div class="col-12"><h2>Loading Pokémons</h2></div>
-        </div>
-    </div>
-
-    <!-- Victory page -->
-    <div class="container victoryPage">
-        <div class="row text-center">
-            <div class="col-12">
-                <h1 class="pb-2">Victory!</h1>
-                <h6 class="pb-3">Reset the game by choosing difficulty</h6>
-                <img class="w-50 rounded" src="https://media.giphy.com/media/5Dz0KYQTtHZ1S/giphy.gif">
+            <div class="row text-center">
+                <div class="col-12">
+                    <img src="https://media.giphy.com/media/jM4bWFBKpSFeo/giphy.gif">
+                </div>
+                <div class="col-12"><h2>Loading Pokémons</h2></div>
             </div>
         </div>
-    </div>
+    
+        <!-- Victory page -->
+        <div class="container victoryPage pt-3">
+            <div class="row text-center">
+                <div class="col-12">
+                    <h1 class="pb-2">Victory!</h1>
+                    <h6 class="pb-3">Reset the game by choosing difficulty.</h6>
+                    <img class="w-50 rounded" src="https://media.giphy.com/media/5Dz0KYQTtHZ1S/giphy.gif">
+                </div>
+            </div>
+        </div>
 
  <!-- Files for audio --> 
  <audio id="clickedSound" src="assets/sound/soundclick.mp3"></audio>
@@ -87,9 +117,11 @@
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<!-- Bootstrap JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <!-- Custom JS -->
-<script src="assets/js/main.js"></script>    
+<script src="assets/js/main.js"></script>   
+
 </body>
 </html>
-
-
