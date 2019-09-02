@@ -28,9 +28,23 @@ let clickedEvent2 = [];
 // Clicks variable.
 let countedFlips = 0;
 
-
 // PokéAPI URL.
 const pokemonDataUrl = 'https://pokeapi.co/api/v2/pokemon/';
+
+// Mute Audio.
+let muteAudio = false;
+
+function muteAll() {
+    $(document).on('click', '.mute-all', function() {
+        muteAudio = true;
+    })
+}
+
+function soundOn() {
+    $(document).on('click', '.sound-on', function() {
+        muteAudio = false;
+    })
+}
 
 // Sound functions.
 
@@ -38,12 +52,20 @@ const pokemonDataUrl = 'https://pokeapi.co/api/v2/pokemon/';
         let audio = new Audio();
         audio.src ='../assets/sound/soundclick.mp3';
 
+        if(muteAudio === true) {
+            audio.muted = true;
+        } 
+
         return audio.play()
     } 
 
     function soundMatch(){
         let audio = new Audio();
         audio.src ='../assets/sound/soundmatch.mp3';
+
+        if(muteAudio === true) {
+            audio.muted = true;
+        } 
         
         return audio.play()
     }
@@ -51,6 +73,10 @@ const pokemonDataUrl = 'https://pokeapi.co/api/v2/pokemon/';
     function soundVictory(){
         let audio = new Audio();
         audio.src ='../assets/sound/soundvictory.mp3';
+
+        if(muteAudio === true) {
+            audio.muted = true;
+        } 
         
         return audio.play()
 
@@ -192,6 +218,10 @@ function playGame() {
 
 // Start the game.
 playGame();
+// Enable Mute button.
+muteAll();
+// Enable sound On.
+soundOn();
 
 // Function for getting data from PokéAPI.
 function getData() {
