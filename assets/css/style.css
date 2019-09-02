@@ -1,10 +1,23 @@
+
+/* Global */
+
 body {
-    background-color: #ffff;
+    background-color: #f9f9f9;
+}
+
+a,
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
 }
 
 .play {
     color: rgb(255, 0, 170);
 }
+
+/* Game controls */
 
 .mute-all:hover {
     color: red;
@@ -14,13 +27,12 @@ body {
     color: rgb(0, 158, 71);
 }
 
-
+/* Pokemon cards */
 
 .card-container {
     -webkit-perspective: 500px;
             perspective: 500px;
-    padding-bottom: 10px;
-
+    padding-top: 10px;
 }
 
 .pokemon {
@@ -56,12 +68,8 @@ body {
     pointer-events: none;
 }
 
- 
-
 .pokemoncard-back {
     background-image: url(../images/pokemoncard_back.png); 
-
-
 }
 
 .pokemoncard-front {
@@ -85,8 +93,119 @@ body {
 
   }
 
-/* Media queries */
+.flip-counter {
+    padding: 5px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
 
+
+
+/* --------- Navigation ----------- */
+
+/* Navbar */
+
+.navbar {
+    padding: 15px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 10x;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Sidebar */
+
+.game-level {
+    text-align: center;
+    font-size: 15px;
+}
+
+.game-level-buttons {
+    border-bottom: 2px solid #2c2d2e;
+    font-weight: bold;
+}
+
+.content-all {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#game-sidebar {
+    min-width: 90px;
+    max-width: 250px;
+    background: rgb(37, 40, 53);
+    color: #fff;
+    transition: all 0.3s;
+}
+
+#game-sidebar.active {
+    margin-left: -90px;
+}
+
+#game-sidebar .sidebar-header {
+    text-align: center;
+    padding: 10px;
+    color: rgb(255, 47, 186);
+    border-bottom: 1px solid #2c2d2e;
+    background: rgb(37, 40, 53);
+}
+
+#game-sidebar ul.components {
+    padding: 0px 0;
+
+}
+
+#game-sidebar ul li a {
+    padding: 5px;
+    font-size: 1em;
+    display: block;
+}
+
+.easy_text:hover {
+    background-color: green;
+}
+
+.medium_text:hover {
+    background-color: #d9b921;
+}
+
+.hard_text:hover {
+    background-color: orangered;
+}
+
+.extreme_text:hover {
+    background-color: red;
+}
+ 
+/* Content Game */
+
+
+#content-game {
+    width: 100%;
+    padding: 0px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -90px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+
+/* Media queries */
 
 /* From tablet size and up */
 
@@ -116,7 +235,7 @@ body {
     .card-container {
         -webkit-perspective: 500px;
                 perspective: 500px;
-        padding-bottom: 30px
+                padding-top: 22px;
     
     }
 }
@@ -131,7 +250,6 @@ body {
         width: 90px;
         height: 125px;
         border: none;
-    
     }
 
     .pokemoncard-back {
@@ -146,3 +264,5 @@ body {
     }
 
 }
+
+
