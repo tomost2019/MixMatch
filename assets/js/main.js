@@ -205,7 +205,7 @@ function getData() {
         url: pokemonDataUrl + randomNumber(), // Calling randomnnumber to get a random pokémon.
         success: function(pokemonData) {
                 
-            var pokemonImgUrl = pokemonData.sprites.front_shiny; // Store and extract pokemon images.
+            var pokemonImgUrl = pokemonData.sprites.front_default; // Store and extract pokemon images.
             originalPokemonImgUrl.push(pokemonImgUrl); // store ImagesURL to a global array called allPokemonImgUrl.
 
         }
