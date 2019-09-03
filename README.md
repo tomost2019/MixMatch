@@ -1,3 +1,5 @@
+![PokemonImage](https://tomost2019.github.io/MixMatch/assets/images/flipcards.JPG)
+
 # MixMatch - Memory Game
 This game is fun and suits young and elder pokémon fans! You can choose how difficult you want it to be and it will always generate random pokémons for you.
 # UX - Match the Pokémons
