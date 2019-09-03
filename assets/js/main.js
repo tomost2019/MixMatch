@@ -261,7 +261,7 @@ function output() {
 
             <div class="col-4 col-sm-3 card-container pb-1">
             <div class="card mx-auto">
-            <div class="pokemoncard-back transformation"></div>
+            <div class="pokemoncard-back transformation"</div>
             <div class="pokemoncard-front transformation"><img class="pokemon" src="${[pokemonUrl]}"></div>
             </div>
             </div>

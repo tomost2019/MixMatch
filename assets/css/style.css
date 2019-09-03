@@ -75,8 +75,7 @@ a:focus {
     background-image: url(../images/pokemoncard_back.png); 
 }
 
-.pokemoncard-front {
-    background-color: #ffff;
+.pokemoncard-front {  
     -webkit-transform: rotateY(-180deg);
     -ms-transform: rotateY(-180deg);
     transform: rotateY(-180deg); 
@@ -93,7 +92,8 @@ a:focus {
     -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
     border-radius: 8px;
-    background-color: #ffff;
+    background-color: #fff;
+
 
   }
 
