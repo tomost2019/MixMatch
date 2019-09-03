@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +16,9 @@
 </head>
 
 <body>
-    <div class="content-all">
+
+<!-- container for the whole app -->
+<div class="content-all">
 
         <!-- Game Sidebar  -->
         <nav id="game-sidebar">
@@ -24,29 +27,30 @@
             </div>
             <ul class="game-level components">    
                 <li class="easy_text">
-                    <a href="#" id="easy" class="game-level-buttons">Easy</a>
+                    <a href="#" id="easy" class="game-level-buttons" rel="noopener" aria-label="Easy">Easy</a>
                 </li>
                 <li class="medium_text">
-                    <a href="#" id="medium" class="game-level-buttons">Medium</a>
+                    <a href="#" id="medium" class="game-level-buttons" rel="noopener" aria-label="Medium">Medium</a>
                 </li>
                 <li class="hard_text">
-                    <a href="#" id="hard" class="game-level-buttons">Hard</a>
+                    <a href="#" id="hard" class="game-level-buttons" rel="noopener" aria-label="Hard">Hard</a>
                 </li>
                 <li class="extreme_text">
-                    <a href="#" id="extreme" class="game-level-buttons">Extreme</a>
+                    <a href="#" id="extreme" class="game-level-buttons" rel="noopener" aria-label="Extreme">Extreme</a>
                 </li>
                 <li class="pokeball">
-                    <img src="assets/images/pokeball.png" class="pt-4">
+                    <img src="assets/images/pokeball.png" alt="Pokémon Ball" class="pt-4">
                 </li>
             </ul>                
         </nav>
 
-    <div id="content-game">
+<!-- Section for game content -->    
+<div id="content-game">
     
     <!-- Navbar -->
     <nav class="navbar navbar-light navbar-expand-md bg-light justify-content-center pb-1">
         <button type="button" id="sidebarCollapse" class="btn btn-sm btn-light">
-            <img src="https://img.icons8.com/windows/32/000000/recurring-appointment.png">
+            <img src="https://img.icons8.com/windows/32/000000/recurring-appointment.png" alt="Reset the Game">
         </button>
             <span class="pl-3 pt-1"><h5>MixMatch</h5></span> 
         <div>
@@ -79,12 +83,11 @@
         <div class="row text-center">
             <div class="col-12 mx-auto">
                 <h1 class="pb-4 play">Let's Play</h1>
-                <h6>
-                    Start the game by selecting your difficulty level.
-                    <p class="pt-2">Match each pokemon to win the game!</p>
+                    <h6>Start the game by selecting your difficulty level.</h6>
+                    <p class="pt-2"><h6>Match each pokemon to win the game!</h6></p>
                     <h5 class="pb-3">Good Luck!</h5>
-                </h6>
-                <img class="w-50 rounded" src="https://media.giphy.com/media/ccctlnR5XKl1e/giphy.gif">
+                
+                <img class="w-50 rounded" src="https://media.giphy.com/media/ccctlnR5XKl1e/giphy.gif" alt="Ash Gif">
             </div>
         </div>
     </div>
@@ -93,7 +96,7 @@
     <div class="container loadingDiv">
             <div class="row text-center">
                 <div class="col-12">
-                    <img src="https://media.giphy.com/media/jM4bWFBKpSFeo/giphy.gif">
+                    <img src="https://media.giphy.com/media/jM4bWFBKpSFeo/giphy.gif" alt="Pikachu Gif">
                 </div>
                 <div class="col-12"><h2>Loading Pokémons</h2></div>
             </div>
@@ -105,10 +108,13 @@
                 <div class="col-12">
                     <h1 class="pb-2">Victory!</h1>
                     <h6 class="pb-3">Reset the game by choosing difficulty.</h6>
-                    <img class="w-50 rounded" src="https://media.giphy.com/media/5Dz0KYQTtHZ1S/giphy.gif">
+                    <img class="w-50 rounded" src="https://media.giphy.com/media/5Dz0KYQTtHZ1S/giphy.gif" alt="Victory Gif">
                 </div>
             </div>
         </div>
+
+</div>
+</div>
 
  <!-- Files for audio --> 
  <audio id="clickedSound" src="assets/sound/soundclick.mp3"></audio>

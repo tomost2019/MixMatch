@@ -6,6 +6,20 @@ let $startPage = $('.start-page').show();
 let $turnCounter = $('.turn-counter').hide();
 // Victory page hidden as standard.
 let $victory = $('.victoryPage').hide();
+// Always show the game-sidebar on mobile devices. 
+$(document).ready(function () {
+    $('#game-sidebar').show()
+})
+
+// Enable Toggle button. 
+$(document).ready(function () {
+    $('#sidebarCollapse').on('click', function () {
+        $('#game-sidebar').toggleClass('active');
+        $('#output').hide();
+        $turnCounter.hide()
+        $('.start-page').show()
+    });
+});
 
 // Settings for game level. Each integer represents number of cards * 2.
 let easy = 4;
@@ -101,7 +115,7 @@ function victory() {
 
 
 
-// function for play the game, checks if cards matches or not. Calls the victory function when all the cards are matched. 
+// Function for playGame, checks if cards matches or not. Counting flips. Calls the victory function when all the cards are matched. 
 function playGame() {
     // click function.
     $(document).on('click', '.card' , function(event) {
@@ -213,27 +227,6 @@ function getData() {
     })
 }
 
-/* Code from stackoverflow.com
-This disables the buttons after the on click event on the game level buttons.
-This is to prevent extra data to be requested while it's loading */
-$.fn.timedDisable = function(time) {
-    if (time == null) { time = 4500; }
-    return $(this).each(function() {
-        $(this).attr('disabled', 'disabled');
-        var disabledElem = $(this);
-        setTimeout(function() {
-            disabledElem.removeAttr('disabled');
-        }, time);
-    });
-};
-
-// Function to target the buttons and disable them while game starts. 
-function disableButtons() {
-    $('#easy').timedDisable();
-    $('#medium').timedDisable();
-    $('#hard').timedDisable();
-}
-
 // Clears all the current data in the arrays before appending new data.
 function clear() {
     originalPokemonImgUrl.length = 0;
@@ -252,7 +245,7 @@ function Shuffle(cards) {
 	return cards;
 }; 
 
-// function iterates through allPokemonImgUrl array and appends the output.
+// Function iterates through allPokemonImgUrl array and appends the output.
 function output() {
     allPokemonImgUrl.forEach(function (pokemonUrl) {
         $('#output').append
@@ -315,7 +308,6 @@ $(document).on('click', '#easy', function() {
     for (var cards = 0; cards < easy; cards++) { 
         getData();
     }
-    disableButtons();   
     clear();
     startGame();
 })
@@ -323,8 +315,7 @@ $(document).on('click', '#easy', function() {
 $(document).on('click', '#medium', function() {
     for (var cards = 0; cards < medium; cards++) {
         getData();
-    }
-    disableButtons();   
+    }   
     clear();
     startGame();
 
@@ -333,8 +324,7 @@ $(document).on('click', '#medium', function() {
 $(document).on('click', '#hard', function() {
     for (var cards = 0; cards < hard; cards++) {
         getData();
-    } 
-    disableButtons();   
+    }    
     clear();
     startGame();
 })
@@ -342,27 +332,11 @@ $(document).on('click', '#hard', function() {
 $(document).on('click', '#extreme', function() {
     for (var cards = 0; cards < extreme; cards++) {
         getData();
-    } 
-    disableButtons();   
+    }   
     clear();
     startGame();
 })
 
-// Always show the game-sidebar on mobile devices. 
-
-$(document).ready(function () {
-    $('#game-sidebar').show()
-})
-
-// Enable Toggle button. 
-$(document).ready(function () {
-    $('#sidebarCollapse').on('click', function () {
-        $('#game-sidebar').toggleClass('active');
-        $('#output').hide();
-        $turnCounter.hide()
-        $('.start-page').show()
-    });
-});
 
 
 
