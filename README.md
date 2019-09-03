@@ -1,15 +1,15 @@
 # MixMatch - Memory Game
-This game is fun and suits young and elder pokémon fans! You can choose how difficuilt you want it to be and it will always generate random pokémons for you.
+This game is fun and suits young and elder pokémon fans! You can choose how difficult you want it to be and it will always generate random pokémons for you.
 # UX - Match the Pokémons
 This is a mobile-first approach game that generates random pokémon cards for you to match. It is a single page app and looks great on mobile devices.
 
 ### Drafts (Wireframes)
 * [Desktop](https://tomost2019.github.io/MixMatch/assets/images/wireframes/MixMatch_GameCards.png)
-* [Mobile-First Approach](https://tomost2019.github.io/MixMatchassets/assets/images/wireframes/MixMatch_Mobile.png)
+* [Mobile-First Approach](https://tomost2019.github.io/MixMatch/assets/images/wireframes/MixMatch_Mobile.png)
 
 ### User Stories
 
-1. As a younger user I would like to have fun while learning and a memory game is perfect for that! With a theme that eveyrone can relate to. 
+1. As a younger user I would like to have fun while learning and a memory game is perfect for that! With a theme that everyone can relate to. 
 2. A user who wants to exercise the brain by doing a fun memory game. 
 3. A perfect fun game for users who want something to do while they wait. 
 
@@ -18,15 +18,15 @@ This is a mobile-first approach game that generates random pokémon cards for yo
 * CSS - Custom styling.
 * Javascript - Making interactive apps. 
 * jQuery - JS Library.
-* Bootstrap 4 Framework - Layout and responsiveness.
+* Bootstrap 4 - Layout and responsiveness.
 * Git - Version Control.
 * Github - Deployment.
-* Visual Studio - IDE
+* Visual Studio - IDE.
 
 ### Features
 
 #### Sidebar
-A sidebar where the user can choose the level of difficulty. Saves space from the navbar
+A sidebar where the user can choose the level of difficulty. Saves space from the navbar.
 #### Navbar
 A navbar where the user can reset the game or control the audio.
 #### Start Page
@@ -72,12 +72,12 @@ It's easy to spend some time fliping cards and match them all. It generates rand
 
 
 
-### Manual Testing:
+### Manual Testing
 
 I have played the game on several devices. In standard mode and potrait mode. Tested all the difficulty levels several times. Trying to double click on cards and buttons to disrupt the gameplay. 
 
 ### Unit Testing
-You could use Jasmine as a framework for testing the JS Code. However I need to do some more studying and research before I can fully apply it and it will be noticable in future projects. 
+You could use Jasmine as a framework to test the JS Code. However I need to do some more studying and research before I can fully apply it and it will be noticable in future projects. 
 
 ### Known Bugs
 It happens sometimes that the user will get uneven cards and can not match all the cards. This is because the function startGame did not finish until the setTimeOut ran out.
