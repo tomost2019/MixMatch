@@ -5,7 +5,7 @@ This is a mobile-first approach game that generates random pokémon cards for yo
 
 ### Drafts (Wireframes)
 * [Desktop](https://tomost2019.github.io/MixMatch/assets/images/wireframes/MixMatch_GameCards.png)
-* [Mobile-First Approach](https://tomost2019.github.io/MixMatchassets/images/wireframes/MixMatch_Mobile.png)
+* [Mobile-First Approach](https://tomost2019.github.io/MixMatchassets/assets/images/wireframes/MixMatch_Mobile.png)
 
 ### User Stories
 
