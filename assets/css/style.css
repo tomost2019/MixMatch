@@ -93,6 +93,7 @@ a:focus {
     -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
     border-radius: 8px;
+    background-color: #ffff;
 
   }
 
