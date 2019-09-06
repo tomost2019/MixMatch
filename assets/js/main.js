@@ -272,27 +272,16 @@ function checkCards() {
 
     let lenghtOfallPokemonImgUrl = allPokemonImgUrl.length;
 
-    if(lenghtOfallPokemonImgUrl >= 0 && lenghtOfallPokemonImgUrl <= 7) {
+    if(lenghtOfallPokemonImgUrl >= 0 && lenghtOfallPokemonImgUrl <= 7 || lenghtOfallPokemonImgUrl >= 9 && lenghtOfallPokemonImgUrl <= 9 || 
+        lenghtOfallPokemonImgUrl >= 11 && lenghtOfallPokemonImgUrl <= 11 || lenghtOfallPokemonImgUrl >= 13 && lenghtOfallPokemonImgUrl <= 23) {
         $('#game-sidebar').toggleClass('active');
         $('.errorPokemons').show();
-    } else if(lenghtOfallPokemonImgUrl >= 9 && lenghtOfallPokemonImgUrl <= 9) {
-        $('#game-sidebar').toggleClass('active');
-        $('.errorPokemons').show();
-    } else if(lenghtOfallPokemonImgUrl >= 11 && lenghtOfallPokemonImgUrl <= 11) {
-        $('#game-sidebar').toggleClass('active');
-        $('.errorPokemons').show();
-
-    } else if(lenghtOfallPokemonImgUrl >= 13 && lenghtOfallPokemonImgUrl <= 23) {
-        $('#game-sidebar').toggleClass('active');
-        $('.errorPokemons').show();
-
-    } else {
+     } else {
         output();
         $turnCounter.show(); // Shows the turns count.
         $('.counted-turns').text('Flips: 0') // Shows the standard counted turns.
         $('#sidebarCollapse').show();
     }
-
 }
 
 /* This function copies the array so that we always have two of the same cards. 
