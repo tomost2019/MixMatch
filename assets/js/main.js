@@ -6,6 +6,8 @@ let $startPage = $('.start-page').show();
 let $turnCounter = $('.turn-counter').hide();
 // Victory page hidden as standard.
 let $victory = $('.victoryPage').hide();
+// Error Loading Pokémons hidden as standard.
+$('.errorPokemons').hide();
 // Always show the game-sidebar on mobile devices. 
 $(document).ready(function () {
     $('#game-sidebar').show()
@@ -264,40 +266,69 @@ function output() {
     }
 )}
 
-/* This function copies the array so that we always have two of the same cards. 
-Then concat into a new array and shuffles it. After that it outputs the result */
-function startGame(){
-    
-    setTimeout( function(){
-        $victory.hide(); // Hides the victory. 
-        $turnCounter.hide(); // Hides the turns count.
-        $startPage.hide(); // Hides the startPage when game starts. 
-        $loading.show(); // Show loading pikachu.
-        $('#game-sidebarCollapse').show();
-        $('#game-sidebar').toggleClass('active');
-        $('#sidebarCollapse').hide();
-        $('#output').show();
-        }, 100 ); 
-    
-    setTimeout( function(){
-        duplicateAllPokemonImgUrl = originalPokemonImgUrl.slice();
-        }, 1500 );
-    
-    setTimeout( function(){
-        allPokemonImgUrl = originalPokemonImgUrl.concat(duplicateAllPokemonImgUrl);
-        }, 3000 );
-    
-    setTimeout( function(){
-        Shuffle(allPokemonImgUrl)
-        $loading.hide(500); // Hide loading pikachu.
-        }, 4000 );
+// Checks if the amount of cards are correct in allPokemonImgUrl before the game starts
+// If they are correct the game starts with the correct output in else. 
+function checkCards() {
 
-    setTimeout( function(){
+    let lenghtOfallPokemonImgUrl = allPokemonImgUrl.length;
+
+    if(lenghtOfallPokemonImgUrl >= 0 && lenghtOfallPokemonImgUrl <= 7) {
+        $('#game-sidebar').toggleClass('active');
+        $('.errorPokemons').show();
+    } else if(lenghtOfallPokemonImgUrl >= 9 && lenghtOfallPokemonImgUrl <= 9) {
+        $('#game-sidebar').toggleClass('active');
+        $('.errorPokemons').show();
+    } else if(lenghtOfallPokemonImgUrl >= 11 && lenghtOfallPokemonImgUrl <= 11) {
+        $('#game-sidebar').toggleClass('active');
+        $('.errorPokemons').show();
+
+    } else if(lenghtOfallPokemonImgUrl >= 13 && lenghtOfallPokemonImgUrl <= 23) {
+        $('#game-sidebar').toggleClass('active');
+        $('.errorPokemons').show();
+
+    } else {
         output();
         $turnCounter.show(); // Shows the turns count.
         $('.counted-turns').text('Flips: 0') // Shows the standard counted turns.
         $('#sidebarCollapse').show();
-        }, 4500 );
+    }
+
+}
+
+/* This function copies the array so that we always have two of the same cards. 
+Then concat into a new array and shuffles it. After that it Checks the amount of cards 
+in the CheckCards function */
+function startGame(){
+    
+
+        $victory.hide(); // Hides the victory. 
+        $turnCounter.hide(); // Hides the turns count.
+        $startPage.hide(); // Hides the startPage when game starts. 
+        $loading.show(); // Show loading pikachu.
+        $('.errorPokemons').hide();
+        $('#game-sidebarCollapse').show();
+        $('#game-sidebar').toggleClass('active');
+        $('#sidebarCollapse').hide();
+        $('#output').show();
+
+    
+    setTimeout( function(){
+        duplicateAllPokemonImgUrl = originalPokemonImgUrl.slice();
+        }, 1000 );
+    
+    setTimeout( function(){
+        allPokemonImgUrl = originalPokemonImgUrl.concat(duplicateAllPokemonImgUrl);
+        }, 1000 );
+    
+    setTimeout( function(){
+        Shuffle(allPokemonImgUrl)
+        $loading.hide(); // Hide loading pikachu.
+        }, 1000 );
+
+    setTimeout( function(){
+        checkCards();
+        }, 1000 );
+
     }
 
 
