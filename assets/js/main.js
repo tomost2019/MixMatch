@@ -322,5 +322,3 @@ $('#extreme').on('click', () => {
     clear();
   
 })
-   
-
