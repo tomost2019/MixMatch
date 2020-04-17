@@ -1,21 +1,18 @@
-// Loading variable to hide loadingDiv as standard.
-let $loading = $('.loadingDiv').hide();
 // StartPage variable to show as standard.
 let $startPage = $('.start-page').show();
 // Turn information is hidden before the game starts.
 let $turnCounter = $('.turn-counter').hide();
 // Victory page hidden as standard.
 let $victory = $('.victoryPage').hide();
-// Error Loading Pokémons hidden as standard.
-$('.errorPokemons').hide();
+
 // Always show the game-sidebar on mobile devices. 
-$(document).ready(function () {
+$(document).ready(() => {
     $('#game-sidebar').show()
 })
 
 // Enable Toggle button. 
-$(document).ready(function () {
-    $('#sidebarCollapse').on('click', function () {
+$(document).ready(() => {
+    $('#sidebarCollapse').on('click', () => {
         $('#game-sidebar').toggleClass('active');
         $('#output').hide();
         $turnCounter.hide()
@@ -29,9 +26,7 @@ let medium = 5;
 let hard = 6;
 let extreme = 12;
 
-// Arrays for PokemonImgUrl.
-let originalPokemonImgUrl = [];
-let duplicateAllPokemonImgUrl = [];
+// Array for PokemonImgUrl.
 let allPokemonImgUrl = [];
 
 // Arrays for the matching the cards.
@@ -50,7 +45,7 @@ const pokemonDataUrl = 'https://pokeapi.co/api/v2/pokemon/';
 
 // Mute Audio.
 function muteAll() {
-    $(document).on('click', '.mute-all', function() {
+    $(document).on('click', '.mute-all', () => {
         $('#clickedSound')[0].muted = true;
         $('#clickedMatch')[0].muted = true;
         $('#clickedVictory')[0].muted = true;
@@ -59,7 +54,7 @@ function muteAll() {
 
 // Turn on Audio.
 function soundOn() {
-    $(document).on('click', '.sound-on', function() {
+    $(document).on('click', '.sound-on', () => {
         $('#clickedSound')[0].muted = false;
         $('#clickedMatch')[0].muted = false;
         $('#clickedVictory')[0].muted = false;
@@ -101,11 +96,11 @@ function victory() {
         $('.counted-turns').text('You Won!');
         
         //setTimeouts to let the user see the last card before it calls the victory. 
-        setTimeout(function () {
+        setTimeout(() => {
             $victory.show();
             soundVictory(); // Calls the victory sound.
         }, 1000)
-        setTimeout( function() {
+        setTimeout(() => {
             $('.card').hide();
             $('#game-sidebar').toggleClass('active');
             $('#sidebarCollapse').hide();
@@ -115,12 +110,10 @@ function victory() {
     }
 }
 
-
-
 // Function for playGame, checks if cards matches or not. Counting flips. Calls the victory function when all the cards are matched. 
 function playGame() {
     // click function.
-    $(document).on('click', '.card' , function(event) {
+    $(document).on('click', '.card' , (event) => {
         let $this = $(event.currentTarget)
         $this.addClass('visible')
 
@@ -182,7 +175,7 @@ function playGame() {
             $('.card').addClass('can-not-flip') 
             
             // flips the cards with a setTimeout. Removes this and previous this data from the arrays  .
-            setTimeout( function(){
+            setTimeout(() => {
                 $('.card').removeClass('can-not-flip') // Enables the user to flip cards again.
                 $this.removeClass('visible');
                 clickedEvent2[0].removeClass('visible');
@@ -207,32 +200,8 @@ function playGame() {
     
 }
 
-// Start the game.
-playGame();
-// Enable Mute button.
-muteAll();
-// Enable sound On.
-soundOn();
-
-// Function for getting data from PokéAPI.
-function getData() {
-    $.ajax ({ 
-        type: 'GET',
-        url: pokemonDataUrl + randomNumber(), // Calling randomnnumber to get a random pokémon.
-        success: function(pokemonData) {
-                
-            var pokemonImgUrl = pokemonData.sprites.front_default; // Store and extract pokemon images.
-            originalPokemonImgUrl.push(pokemonImgUrl); // store ImagesURL to a global array called allPokemonImgUrl.
-
-        }
-        
-    })
-}
-
 // Clears all the current data in the arrays before appending new data.
 function clear() {
-    originalPokemonImgUrl.length = 0;
-    duplicateAllPokemonImgUrl.length = 0;
     allPokemonImgUrl.length = 0;
     gameCards.length = 0;
     clickedEvent.length = 0;
@@ -249,39 +218,45 @@ function Shuffle(cards) {
 
 // Function iterates through allPokemonImgUrl array and appends the output.
 function output() {
-    allPokemonImgUrl.forEach(function (pokemonUrl) {
-        $('#output').append
+    $('#output').append(allPokemonImgUrl.map(pokemonUrl =>
         
         (`
+        <div class="col-4 col-sm-3 card-container pb-1">
+        <div class="card mx-auto">
+        <div class="pokemoncard-back transformation"</div>
+        <div class="pokemoncard-front transformation"><img class="pokemon" src="${[pokemonUrl]}"></div>
+        </div>
+        </div>
+        `)
 
-            <div class="col-4 col-sm-3 card-container pb-1">
-            <div class="card mx-auto">
-            <div class="pokemoncard-back transformation"</div>
-            <div class="pokemoncard-front transformation"><img class="pokemon" src="${[pokemonUrl]}"></div>
-            </div>
-            </div>
+    ))
+  }
+  
 
-        `);
-        
-    }
-)}
+// Get the API link with a random Pokémon (number).
+async function getImageUrl(number) {
+  
+    const data = await fetch(pokemonDataUrl + number).then(r => r.json());
+  
+    return data.sprites.front_default;
+}
 
-// Checks if the amount of cards are correct in allPokemonImgUrl before the game starts
-// If they are correct the game starts with the correct output in else. 
-function checkCards() {
-
-    let lenghtOfallPokemonImgUrl = allPokemonImgUrl.length;
-
-    if(lenghtOfallPokemonImgUrl >= 0 && lenghtOfallPokemonImgUrl <= 7 || lenghtOfallPokemonImgUrl >= 9 && lenghtOfallPokemonImgUrl <= 9 || 
-        lenghtOfallPokemonImgUrl >= 11 && lenghtOfallPokemonImgUrl <= 11 || lenghtOfallPokemonImgUrl >= 13 && lenghtOfallPokemonImgUrl <= 23) {
-        $('#game-sidebar').toggleClass('active');
-        $('.errorPokemons').show();
-     } else {
-        output();
-        $turnCounter.show(); // Shows the turns count.
-        $('.counted-turns').text('Flips: 0') // Shows the standard counted turns.
-        $('#sidebarCollapse').show();
-    }
+// Fetch the data from the Pokémon API and push into the array with double values of each and then append the data with the output function.
+async function fetchPokemonData(difficulty) {
+  
+     // create array of numbers
+    const numbers = new Array(difficulty).fill(0).map(() => randomNumber());
+  
+    // create array of promises from numbers, await them all
+    await Promise.all(numbers.map(number => getImageUrl(number)))
+      .then(result => {
+        allPokemonImgUrl = [...result, ...result];
+      })
+      .then(() => Shuffle(allPokemonImgUrl))
+      .catch(error => console.log(error));
+  
+    output(allPokemonImgUrl);
+  
 }
 
 /* This function copies the array so that we always have two of the same cards. 
@@ -289,87 +264,63 @@ Then concat into a new array and shuffles it. After that it Checks the amount of
 in the CheckCards function */
 function startGame(){
     
+    $victory.hide(); // Hides the victory. 
+    $turnCounter.hide(); // Hides the turns count.
+    $startPage.hide(); // Hides the startPage when game starts. 
+    $('#game-sidebarCollapse').show();
+    $('#game-sidebar').toggleClass('active');
+    $('#sidebarCollapse').hide();
+    $('#output').show();
+    $turnCounter.show(); // Shows the turns count.
+    $('.counted-turns').text('Flips: 0') // Shows the standard counted turns.
+    $('#sidebarCollapse').show();
 
-        $victory.hide(); // Hides the victory. 
-        $turnCounter.hide(); // Hides the turns count.
-        $startPage.hide(); // Hides the startPage when game starts. 
-        $loading.show(); // Show loading pikachu.
-        $('.errorPokemons').hide();
-        $('#game-sidebarCollapse').show();
-        $('#game-sidebar').toggleClass('active');
-        $('#sidebarCollapse').hide();
-        $('#output').show();
+}
 
+
+// Start the game.
+    playGame();
     
-    setTimeout( function(){
-        duplicateAllPokemonImgUrl = originalPokemonImgUrl.slice();
-        }, 1000 );
-    
-    setTimeout( function(){
-        allPokemonImgUrl = originalPokemonImgUrl.concat(duplicateAllPokemonImgUrl);
-        }, 1000 );
-    
-    setTimeout( function(){
-        Shuffle(allPokemonImgUrl)
-        $loading.hide(); // Hide loading pikachu.
-        }, 1000 );
-
-    setTimeout( function(){
-        checkCards();
-        }, 1000 );
-
-    }
-
+// Enable Mute button.
+    muteAll();
+ 
+// Enable sound On.
+    soundOn();
 
 /* Events for clicking on game levels. It iterates to check how many cards it needs
 and calls functions accordingly. */
 
-$(document).on('click', '#easy', function() {
-    for (var cards = 0; cards < easy; cards++) { 
-        getData();
-    }
-    clear();
+
+$('#easy').on('click', () => {
+
+    fetchPokemonData(easy);
     startGame();
+    clear();
+  
+})
+
+$('#medium').on('click', () => {
+
+    fetchPokemonData(medium);
+    startGame();
+    clear();
+  
+})
+
+$('#hard').on('click', () => {
+
+    fetchPokemonData(hard);
+    startGame();
+    clear();
+  
+})
+
+$('#extreme').on('click', () => {
+
+    fetchPokemonData(extreme);
+    startGame();
+    clear();
+  
 })
    
-$(document).on('click', '#medium', function() {
-    for (var cards = 0; cards < medium; cards++) {
-        getData();
-    }   
-    clear();
-    startGame();
 
-})
-
-$(document).on('click', '#hard', function() {
-    for (var cards = 0; cards < hard; cards++) {
-        getData();
-    }    
-    clear();
-    startGame();
-})
-
-$(document).on('click', '#extreme', function() {
-    for (var cards = 0; cards < extreme; cards++) {
-        getData();
-    }   
-    clear();
-    startGame();
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
