@@ -287,38 +287,24 @@ function startGame(){
 // Enable sound On.
     soundOn();
 
-/* Events for clicking on game levels. It iterates to check how many cards it needs
-and calls functions accordingly. */
+// Event trigger to start the game. Checks which level has been chosen and starts the game with the correct amount of cards.
+$('#all-levels').on('click', (event) => {
+    
+    let levelId = event.target.id;
 
+    if (levelId === "easy") {
+        fetchPokemonData(easy);
+    } else if  (levelId === "medium") {
+        fetchPokemonData(medium);
+    } else if  (levelId === "hard") {
+        fetchPokemonData(hard);
+    } else if  (levelId === "extreme") {
+        fetchPokemonData(extreme);
+    }
 
-$('#easy').on('click', () => {
-
-    fetchPokemonData(easy);
     startGame();
     clear();
-  
+    
 })
 
-$('#medium').on('click', () => {
 
-    fetchPokemonData(medium);
-    startGame();
-    clear();
-  
-})
-
-$('#hard').on('click', () => {
-
-    fetchPokemonData(hard);
-    startGame();
-    clear();
-  
-})
-
-$('#extreme').on('click', () => {
-
-    fetchPokemonData(extreme);
-    startGame();
-    clear();
-  
-})
