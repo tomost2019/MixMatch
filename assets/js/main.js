@@ -236,18 +236,18 @@ function output() {
 // Get the API link with a random Pokémon (number).
 async function getImageUrl(number) {
   
-    const data = await fetch(pokemonDataUrl + number).then(r => r.json());
+    const imageData = await fetch(pokemonDataUrl + number).then(result => result.json());
   
-    return data.sprites.front_default;
+    return imageData.sprites.front_default;
 }
 
 // Fetch the data from the Pokémon API and push into the array with double values of each and then append the data with the output function.
 async function fetchPokemonData(difficulty) {
   
-     // create array of numbers
+ 
     const numbers = new Array(difficulty).fill(0).map(() => randomNumber());
   
-    // create array of promises from numbers, await them all
+
     await Promise.all(numbers.map(number => getImageUrl(number)))
       .then(result => {
         allPokemonImgUrl = [...result, ...result];
@@ -306,5 +306,3 @@ $('#all-levels').on('click', (event) => {
     clear();
     
 })
-
-
